@@ -19,7 +19,7 @@ d3.json("/api/charts",
 
         document.getElementById("term").innerHTML = data.term;
 
-        // Format date
+        //format date
         var parseDate = d3.timeParse("%Y-%m-%d");
         data = data.results.map(function (d) {
             d.date = parseDate(d.date);
