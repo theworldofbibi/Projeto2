@@ -2,6 +2,7 @@
 var margin = { top: 10, right: 30, bottom: 30, left: 60 },
     width = 860 - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom;
+
 // append the svg object to the body of the page
 var svg = d3.select("#my_dataviz")
     .append("svg")
@@ -10,8 +11,9 @@ var svg = d3.select("#my_dataviz")
     .append("g")
     .attr("transform",
         "translate(" + margin.left + "," + margin.top + ")");
+
 //Read the data
-d3.json("/api/Charts",
+d3.json("/api/charts",
     // Now I can use this dataset:
     function (data) {
 
@@ -38,7 +40,7 @@ d3.json("/api/Charts",
         // Add Y axis
         var y = d3.scaleLinear()
             .domain(d3.extent(data, function (d) { return d.value; }))
-            .range([height, 0]);
+            .range([0, height]);
         svg.append("g")
             .call(d3.axisLeft(y));
 
@@ -46,8 +48,8 @@ d3.json("/api/Charts",
         svg.append("path")
             .datum(data)
             .attr("fill", "none")
-            .attr("stroke", "black")
-            .attr("stroke-width", 1.5)
+            .attr("stroke", "#f7ff00")
+            .attr("stroke-width", 2.5)
             .attr("d", d3.line()
                 .x(function (d) { return x(d.date) })
                 .y(function (d) { return y(d.value) })
@@ -62,6 +64,6 @@ d3.json("/api/Charts",
             .append("circle")
             .attr("cx", function (d) { return x(d.date) })
             .attr("cy", function (d) { return y(d.value) })
-            .attr("r", 2)
-            .attr("fill", "#890d20")
+            .attr("r", 4)
+            .attr("fill", "#ff00cc")
     })

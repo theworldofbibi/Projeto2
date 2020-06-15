@@ -1,11 +1,10 @@
 package org.DuaLipa.db;
 
 import org.DuaLipa.api.*;
-
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Scanner;
+import java.util.*;
 
 public class ChartsDAO {
     Charts dataBase;
@@ -30,7 +29,7 @@ public class ChartsDAO {
                 if (week != null) {
                     Results results = new Results();
                     results.setDate(cols[0]);
-                    results.setPosition(Double.parseDouble(cols[1]));
+                    results.setValue(Double.parseDouble(cols[1]));
                     this.dataBase.getResults().add(results);
 
                     // Lendo cabecalho

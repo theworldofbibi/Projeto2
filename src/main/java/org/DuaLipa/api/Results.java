@@ -2,21 +2,19 @@ package org.DuaLipa.api;
 
 public class Results {
     String date;
-    private double position;
+    Double value;
 
     public String getDate() {
         return date;
     }
-
     public void setDate(String date) {
         this.date = date;
     }
 
-    public double getPosition() {
-        return position;
+    public Double getValue() {
+        return value;
     }
-
-    public void setPosition(double position) {
-        this.position = position;
+    public void setValue(Double value) {
+        this.value = value;
     }
 }
