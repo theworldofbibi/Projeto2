@@ -20,8 +20,9 @@ public class ChartsResource {
     @GET
     public Charts getAllCharts(){
         return dao.getAllCharts();
-    }*/
+    }
     List<Results> results;
+
     public ChartsResource (){
         this.results=new ArrayList<>();
 
@@ -32,30 +33,42 @@ public class ChartsResource {
             this.results.add(r);
         }
     }
+    */
+
+    ChartsDAO dao;
+
+    public ChartsResource(ChartsDAO dao){
+        this.dao=dao;
+    }
+
+    List<Results> results;
 
     @GET
     public List<Results>getResults(){
         return this.results;
     }
+
     @POST
     public Results createResults(Results r){
         this.results.add(r);
         return r;
     }
+
     @PUT
     public Results updateResults(Results r){
         for (int i=0;i<this.results.size();i++){
-            if(this.results.get(i).getDate().equals(r.getDate())){
-                this.results.get(i).setValue(r.getValue());
+            if(this.results.get(i).getWeek().equals(r.getWeek())){
+                this.results.get(i).setPosition(r.getPosition());
                 return r;
             }
         }
         throw new NotFoundException();
     }
+
     @DELETE
     public Results deleteResults(String date){
         for (int i=0;i<this.results.size();i++){
-            if(this.results.get(i).getDate().equals(date)){
+            if(this.results.get(i).getWeek().equals(date)){
                 Results aux = this.results.get(i);
                 this.results.remove(i);
                 return aux;

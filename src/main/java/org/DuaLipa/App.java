@@ -43,7 +43,7 @@ public class App extends Application<Configuration>
         cors.addMappingForUrlPatterns(EnumSet.allOf(DispatcherType.class), true, "/*");
 
         ChartsDAO dao = new ChartsDAO();
-        ChartsResource chartsResource = new ChartsResource();
+        ChartsResource chartsResource = new ChartsResource(dao);
         environment.jersey().register(chartsResource);
 
         environment.jersey().setUrlPattern("/api/*");

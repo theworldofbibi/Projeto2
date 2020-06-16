@@ -1,20 +1,25 @@
 package org.DuaLipa.api;
 
+import java.sql.Date;
+
 public class Results {
-    String date;
-    Double value;
+    private Date Week;
+    private int Position;
 
-    public String getDate() {
-        return date;
-    }
-    public void setDate(String date) {
-        this.date = date;
+
+    public Date getWeek() {
+        return Week;
     }
 
-    public Double getValue() {
-        return value;
+    public void setWeek(Date week) {
+        Week = week;
     }
-    public void setValue(Double value) {
-        this.value = value;
+
+    public int getPosition() {
+        return Position;
+    }
+
+    public void setPosition(int position) {
+        Position = position;
     }
 }

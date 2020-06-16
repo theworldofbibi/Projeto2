@@ -2,11 +2,52 @@ package org.DuaLipa.db;
 
 import org.DuaLipa.api.*;
 import java.io.File;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.*;
 
 public class ChartsDAO {
+    private String readSQL = "SELECT * FROM Pais";
+
+    private final MySQLConnection mysql = new MySQLConnection();
+
+    public List<Results> read() {
+        Connection conexao = mysql.getConnection();
+        List<Results> r = new ArrayList();
+
+        try {
+            PreparedStatement stm = conexao.prepareStatement(readSQL);
+            ResultSet rs = stm.executeQuery();
+
+            while (rs.next()) {
+                Results results = new Results();
+                results.setWeek(rs.getDate("Week"));
+                results.setPosition(rs.getInt("Position"));
+                r.add(results);
+            }
+
+            return r;
+
+        } catch (final SQLException ex) {
+            System.out.println("Falha de conexão com a base de dados!");
+            ex.printStackTrace();
+        } catch (final Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                conexao.close();
+            } catch (final Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+        return r;
+    }
+
+    /*
     Charts dataBase;
     public ChartsDAO() {
         this.dataBase = new Charts();
@@ -24,7 +65,7 @@ public class ChartsDAO {
 
                 try {
                     week = sdf.parse(cols[0]);
-                } catch(Exception e) { /*Não é uma data*/ }
+                } catch(Exception e) { /*Não é uma data}
 
                 if (week != null) {
                     Results results = new Results();
@@ -47,5 +88,5 @@ public class ChartsDAO {
     }
     public Charts getAllCharts() {
         return this.dataBase;
-    }
+    } */
 }
