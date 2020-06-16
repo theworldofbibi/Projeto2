@@ -26,13 +26,11 @@ public class App extends Application<Configuration>
     public String getName() {
         return "did a full 180";
     }
-
     @Override
     public void initialize(Bootstrap<Configuration> bootstrap) {
         AssetsBundle assetsBundle = new AssetsBundle("/site", "/", "index.html");
         bootstrap.addBundle(assetsBundle);
     }
-
     @Override
     public void run(Configuration configuration, Environment environment) {
         final FilterRegistration.Dynamic cors =
@@ -45,7 +43,7 @@ public class App extends Application<Configuration>
         cors.addMappingForUrlPatterns(EnumSet.allOf(DispatcherType.class), true, "/*");
 
         ChartsDAO dao = new ChartsDAO();
-        ChartsResource chartsResource = new ChartsResource(dao);
+        ChartsResource chartsResource = new ChartsResource();
         environment.jersey().register(chartsResource);
 
         environment.jersey().setUrlPattern("/api/*");

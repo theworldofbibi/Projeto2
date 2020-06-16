@@ -10,14 +10,18 @@ import javax.ws.rs.core.MediaType;
 @Path("charts")
 @Produces(MediaType.APPLICATION_JSON)
 public class ChartsResource {
-    //ChartsDAO dao;
+    /*ChartsDAO dao;
 
-    /*public ChartsResource(ChartsDAO dao){
+    public ChartsResource(ChartsDAO dao){
         this.dao=dao;
+    }
+     List<Results> results;
+
+    @GET
+    public Charts getAllCharts(){
+        return dao.getAllCharts();
     }*/
-
     List<Results> results;
-
     public ChartsResource (){
         this.results=new ArrayList<>();
 
@@ -33,13 +37,11 @@ public class ChartsResource {
     public List<Results>getResults(){
         return this.results;
     }
-
     @POST
     public Results createResults(Results r){
         this.results.add(r);
         return r;
     }
-
     @PUT
     public Results updateResults(Results r){
         for (int i=0;i<this.results.size();i++){
@@ -50,7 +52,6 @@ public class ChartsResource {
         }
         throw new NotFoundException();
     }
-
     @DELETE
     public Results deleteResults(String date){
         for (int i=0;i<this.results.size();i++){
@@ -62,7 +63,4 @@ public class ChartsResource {
         }
         throw new NotFoundException();
     }
-
-
-
 }

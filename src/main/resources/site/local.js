@@ -26,7 +26,7 @@ d3.json("/api/charts",
             return d;
         });
 
-        // filte data
+        // filter data
         data = data.filter(function (d) { return d.value != null; });
 
         // Add X axis --> it is a date format
