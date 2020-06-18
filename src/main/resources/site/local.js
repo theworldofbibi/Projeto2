@@ -17,29 +17,32 @@ d3.json("/api/charts",
     // Now I can use this dataset:
     function (data) {
 
-        document.getElementById("term").innerHTML = data.term;
+        //document.getElementById("term").innerHTML = data.term;
 
         //format date
         var parseDate = d3.timeParse("%Y-%m-%d");
-        data = data.results.map(function (d) {
-            d.date = parseDate(d.date);
+        data = data.map(function (d) {
+            d.week = parseDate(d.week);
             return d;
         });
 
         // filter data
-        data = data.filter(function (d) { return d.value != null; });
+        data = data.filter(function (d) { return d.position != null; });
 
         // Add X axis --> it is a date format
         var x = d3.scaleTime()
-            .domain(d3.extent(data, function (d) { return d.date; }))
+            .domain(d3.extent(data, function (d) { return d.week; }))
             .range([0, width]);
         svg.append("g")
             .attr("transform", "translate(0," + height + ")")
-            .call(d3.axisBottom(x));
+            .call(d3.axisBottom(x))
+                //.tickFormat(d3.timeFormat("%d-%m")) 
+                //.ticks(data.length)
+
 
         // Add Y axis
         var y = d3.scaleLinear()
-            .domain(d3.extent(data, function (d) { return d.value; }))
+            .domain(d3.extent(data, function (d) { return d.position; }))
             .range([0, height]);
         svg.append("g")
             .call(d3.axisLeft(y));
@@ -51,8 +54,8 @@ d3.json("/api/charts",
             .attr("stroke", "#f7ff00")
             .attr("stroke-width", 2.5)
             .attr("d", d3.line()
-                .x(function (d) { return x(d.date) })
-                .y(function (d) { return y(d.value) })
+                .x(function (d) { return x(d.week) })
+                .y(function (d) { return y(d.position) })
             )
 
         // Add the points
@@ -62,8 +65,8 @@ d3.json("/api/charts",
             .data(data)
             .enter()
             .append("circle")
-            .attr("cx", function (d) { return x(d.date) })
-            .attr("cy", function (d) { return y(d.value) })
+            .attr("cx", function (d) { return x(d.week) })
+            .attr("cy", function (d) { return y(d.position) })
             .attr("r", 4)
             .attr("fill", "#ff00cc")
     })

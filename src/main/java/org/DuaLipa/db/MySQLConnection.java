@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 
 public class MySQLConnection {
     String db="DuaLipaCharts";
-    String url="jdbc:mysql://localhost:32775/"+db; //localhost:32771 necessário mudar para "localhost:32775" (ass: Danilo)
+    String url="jdbc:mysql://localhost:32771/"+db; //localhost:32771 necessário mudar para "localhost:32775" (ass: Danilo)
     String usuario = "root";
     String senha = "root";
 

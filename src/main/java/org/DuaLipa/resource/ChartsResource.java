@@ -41,14 +41,12 @@ public class ChartsResource {
         this.dao=dao;
     }
 
-    List<Results> results;
-
     @GET
     public List<Results>getResults(){
-        return this.results;
+        return this.dao.read();
     }
 
-    @POST
+    /*@POST
     public Results createResults(Results r){
         this.results.add(r);
         return r;
@@ -75,5 +73,5 @@ public class ChartsResource {
             }
         }
         throw new NotFoundException();
-    }
+    }*/
 }

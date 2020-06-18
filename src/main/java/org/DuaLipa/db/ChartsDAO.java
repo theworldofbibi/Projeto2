@@ -1,6 +1,8 @@
 package org.DuaLipa.db;
 
 import org.DuaLipa.api.*;
+
+import javax.xml.transform.Result;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,7 +13,12 @@ import java.util.Date;
 import java.util.*;
 
 public class ChartsDAO {
-    private String readSQL = "SELECT * FROM Pais";
+
+    public ChartsDAO() {
+
+        }
+
+    private String readSQL = "SELECT * FROM DSN_DuaLipa";
 
     private final MySQLConnection mysql = new MySQLConnection();
 
@@ -25,7 +32,7 @@ public class ChartsDAO {
 
             while (rs.next()) {
                 Results results = new Results();
-                results.setWeek(rs.getDate("Week"));
+                results.setWeek(rs.getString("Week"));
                 results.setPosition(rs.getInt("Position"));
                 r.add(results);
             }
@@ -85,8 +92,5 @@ public class ChartsDAO {
             ex.printStackTrace();
             System.out.println("Charts - Erro na leitura do CSV");
         }
-    }
-    public Charts getAllCharts() {
-        return this.dataBase;
-    } */
+    }*/
 }
