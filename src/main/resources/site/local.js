@@ -17,8 +17,6 @@ d3.json("/api/charts",
     // Now I can use this dataset:
     function (data) {
 
-        //document.getElementById("term").innerHTML = data.term;
-
         //format date
         var parseDate = d3.timeParse("%Y-%m-%d");
         data = data.map(function (d) {
@@ -35,6 +33,9 @@ d3.json("/api/charts",
             .range([0, width]);
         svg.append("g")
             .attr("transform", "translate(0," + height + ")")
+            .attr("stroke", "#ffffff")
+            .attr("stroke-width", 0.5)
+            .style("fill", "#ffffff")
             .call(d3.axisBottom(x))
                 //.tickFormat(d3.timeFormat("%d-%m")) 
                 //.ticks(data.length)
@@ -45,13 +46,16 @@ d3.json("/api/charts",
             .domain(d3.extent(data, function (d) { return d.position; }))
             .range([0, height]);
         svg.append("g")
+            .attr("stroke", "#ffffff")
+            .attr("stroke-width", 0.5)
+            .style("fill", "#ffffff")
             .call(d3.axisLeft(y));
 
         // Add the line
         svg.append("path")
             .datum(data)
             .attr("fill", "none")
-            .attr("stroke", "#f7ff00")
+            .attr("stroke", "#8CB9D8")
             .attr("stroke-width", 2.5)
             .attr("d", d3.line()
                 .x(function (d) { return x(d.week) })
@@ -68,5 +72,5 @@ d3.json("/api/charts",
             .attr("cx", function (d) { return x(d.week) })
             .attr("cy", function (d) { return y(d.position) })
             .attr("r", 4)
-            .attr("fill", "#ff00cc")
+            .attr("fill", "#fff400")
     })

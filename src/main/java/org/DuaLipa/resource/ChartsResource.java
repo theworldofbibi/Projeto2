@@ -10,31 +10,6 @@ import javax.ws.rs.core.MediaType;
 @Path("charts")
 @Produces(MediaType.APPLICATION_JSON)
 public class ChartsResource {
-    /*ChartsDAO dao;
-
-    public ChartsResource(ChartsDAO dao){
-        this.dao=dao;
-    }
-     List<Results> results;
-
-    @GET
-    public Charts getAllCharts(){
-        return dao.getAllCharts();
-    }
-    List<Results> results;
-
-    public ChartsResource (){
-        this.results=new ArrayList<>();
-
-        for(int i=1;i<31;i++){
-            Results r = new Results();
-            r.setValue(Math.random());
-            r.setDate("2020-06-"+i);
-            this.results.add(r);
-        }
-    }
-    */
-
     ChartsDAO dao;
 
     public ChartsResource(ChartsDAO dao){

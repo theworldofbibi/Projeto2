@@ -1,12 +1,108 @@
+<!DOCTYPE html>
+<html>
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=1024px, initial-scale=1, user-scalable=yes">
+    <title>#StreamDontStartNow</title>
+    <!-- ESTILOS -->
+    <link rel="stylesheet" type="text/css" href="./style.css">
+    <!-- SCRIPTS -->
     <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="./local.js"></script>
 </head>
 
-<body>
-<center><H1>Don't Start Now by Dua Lipa</H1>
-        <h2>Weekly Spotify Charts</h2>
-        <div id="term"></div>
-        <div id="my_dataviz"></div></center>
+<body id="body">
+<center>
+    <a href="https://open.spotify.com/track/6WrI0LAC5M1Rw2MnX2ZvEg?si=rQ7JGqJLQWenqLkjQyrnHA">
+        <img src="./logo.png" id="logo">
+    </a>
+    <h2 id="graphic-name">Weekly Spotify Charts</h2>
+    <div id="term"></div>
+    <div id="my_dataviz"></div>
+</center>
+
+
+<div id = "rightbox">
+    <center>
+        <h2 style="font-weight:1000">Delete</h2>
+        <table>
+            <tr>
+            </tr>
+
+            <td id="idProfessor"></td>
+            <tr>
+                <td><b>Nome:</b></td>
+                <td id="nomeProfessor"></td>
+            </tr>
+            <tr>
+                <td  style="padding-top: 8px"><b>Matrícula:</b></td>
+                <td id="matriculaProfessor"  style="padding-top: 8px"></td>
+            </tr>
+            <tr><td></td><td><center><input type="button" onclick="apagarProfessor()" value="Apagar" id="apagar"></center></td></tr>
+        </table>
+        <p style="font-weight:bold" id="mensagem"></p>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Matrícula</th>
+            </tr>
+            <tbody id="professores">
+            </tbody>
+        </table>
+    </center>
+</div>
+
+<div id = "leftbox">
+    <center>
+        <h3 style="font-weight:1000">Create</h3>
+        <table>
+            <tr>
+                <td><b>Nome:</b></td>
+                <td><input type="text" id="txtNome"></td>
+            </tr>
+            <tr >
+                <td style="padding-top: 8px"><b>Matrícula:</b></td>
+                <td style="padding-top: 8px"><input type="text" id="txtMatricula"></td>
+            </tr>
+            <tr><td></td><td style="padding-top: 2px"><center><input type="button" onclick="criarProfessor()" value="Criar" id="criar"></center></td></tr>
+        </table>
+    </center>
+</div>
+
+<div id = "middlebox">
+    <center>
+        <h3 style="font-weight:1000">Update</h3>
+        <table>
+            <tr>
+            </tr>
+
+            <td id="idProfessor"></td>
+            <tr>
+                <td><b>Nome:</b></td>
+                <td><input type="text" id="txtNome"></td>
+            </tr>
+            <tr>
+                <td style="padding-top: 8px"><b>Matrícula:</b></td>
+                <td style="padding-top: 8px"><input type="text" id="txtMatricula"></td>
+            </tr>
+            <tr><td></td><td style="padding-top: 2px"><center><input type="button" onclick="atualizarProfessor()" value="Salvar" id="atualizar"></center></td></tr>
+        </table>
+        <p style="font-weight:bold" id="mensagem"></p>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Matrícula</th>
+            </tr>
+            <tbody id="professores">
+            </tbody>
+        </table>
+    </center>
+</div>
+
+<!-- SCRIPTS -->
 <script src="local.js"></script>
 </body>
+</html>
+
