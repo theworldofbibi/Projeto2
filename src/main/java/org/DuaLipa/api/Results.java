@@ -6,7 +6,6 @@ public class Results {
     private String Week;
     private int Position;
 
-
     public String getWeek() {
         return Week;
     }

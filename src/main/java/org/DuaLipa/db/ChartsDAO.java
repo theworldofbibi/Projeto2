@@ -18,9 +18,40 @@ public class ChartsDAO {
 
         }
 
+    private String createSQL = "INSERT INTO DSN_DuaLipa VALUES (?, ?)";
     private String readSQL = "SELECT * FROM DSN_DuaLipa";
+    private String updateSQL = "UPDATE DSN_DuaLipa SET Week = ?, Position = ?";
+    private String deleteSQL = "DELETE FROM DSN_DuaLipa WHERE Week = ?, Position = ?";
 
     private final MySQLConnection mysql = new MySQLConnection();
+
+    public boolean create(Results results) {
+        Connection conexao = mysql.getConnection();
+
+        try {
+            PreparedStatement stm = conexao.prepareStatement(createSQL);
+            ResultSet rs = stm.executeQuery();
+
+            stm.setString(1, results.getWeek());
+            stm.setInt(2, results.getPosition());
+
+            int registros = stm.executeUpdate();
+            return registros > 0 ? true : false;
+
+        } catch (final SQLException ex) {
+            System.out.println("Falha de conexão com a base de dados!");
+            ex.printStackTrace();
+        } catch (final Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                conexao.close();
+            } catch (final Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+        return false;
+    }
 
     public List<Results> read() {
         Connection conexao = mysql.getConnection();
@@ -52,6 +83,61 @@ public class ChartsDAO {
             }
         }
         return r;
+    }
+
+    public boolean update(Results results) {
+        Connection conexao = mysql.getConnection();
+
+        try {
+            PreparedStatement stm = conexao.prepareStatement(updateSQL);
+            ResultSet rs = stm.executeQuery();
+
+            stm.setString(1, results.getWeek());
+            stm.setInt(2, results.getPosition());
+
+            int registros = stm.executeUpdate();
+            return registros > 0 ? true : false;
+
+        } catch (final SQLException ex) {
+            System.out.println("Falha de conexão com a base de dados!");
+            ex.printStackTrace();
+        } catch (final Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                conexao.close();
+            } catch (final Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+        return false;
+    }
+
+    public boolean delete(Results results) {
+        Connection conexao = mysql.getConnection();
+
+        try {
+            PreparedStatement stm = conexao.prepareStatement(deleteSQL);
+
+            stm.setString(1, results.getWeek());
+            stm.setInt(2, results.getPosition());
+
+            int registros = stm.executeUpdate();
+            return registros > 0 ? true : false;
+
+        } catch (final SQLException ex) {
+            System.out.println("Falha de conexão com a base de dados!");
+            ex.printStackTrace();
+        } catch (final Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                conexao.close();
+            } catch (final Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+        return false;
     }
 
     /*

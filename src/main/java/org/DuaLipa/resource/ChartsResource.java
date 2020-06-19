@@ -21,8 +21,8 @@ public class ChartsResource {
         return this.dao.read();
     }
 
-    /*@POST
-    public Results createResults(Results r){
+   /* @POST
+    public Results createResults(Results results){
         this.results.add(r);
         return r;
     }
@@ -48,5 +48,5 @@ public class ChartsResource {
             }
         }
         throw new NotFoundException();
-    }*/
+    } */
 }
