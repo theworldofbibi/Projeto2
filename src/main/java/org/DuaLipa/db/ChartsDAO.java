@@ -20,17 +20,19 @@ public class ChartsDAO {
 
     private String createSQL = "INSERT INTO DSN_DuaLipa VALUES (?, ?)";
     private String readSQL = "SELECT * FROM DSN_DuaLipa";
-    private String updateSQL = "UPDATE DSN_DuaLipa SET Week = ?, Position = ?";
-    private String deleteSQL = "DELETE FROM DSN_DuaLipa WHERE Week = ?, Position = ?";
+    private String updateSQL = "UPDATE DSN_DuaLipa SET Position = ? WHERE Week=?";
+    private String deleteSQL = "DELETE FROM DSN_DuaLipa WHERE Week = ?";
 
-    private final MySQLConnection mysql = new MySQLConnection();
+    private final MySQLConnection mysql = new MySQLConnection();//
+    public int size(){
+        List<Results> r = new ArrayList();
 
+        return r.size();
+    }
     public boolean create(Results results) {
         Connection conexao = mysql.getConnection();
-
         try {
             PreparedStatement stm = conexao.prepareStatement(createSQL);
-            ResultSet rs = stm.executeQuery();
 
             stm.setString(1, results.getWeek());
             stm.setInt(2, results.getPosition());
@@ -52,7 +54,6 @@ public class ChartsDAO {
         }
         return false;
     }
-
     public List<Results> read() {
         Connection conexao = mysql.getConnection();
         List<Results> r = new ArrayList();
@@ -84,16 +85,13 @@ public class ChartsDAO {
         }
         return r;
     }
-
     public boolean update(Results results) {
         Connection conexao = mysql.getConnection();
 
         try {
             PreparedStatement stm = conexao.prepareStatement(updateSQL);
-            ResultSet rs = stm.executeQuery();
-
-            stm.setString(1, results.getWeek());
-            stm.setInt(2, results.getPosition());
+            stm.setString(2, results.getWeek());
+            stm.setInt(1, results.getPosition());
 
             int registros = stm.executeUpdate();
             return registros > 0 ? true : false;
@@ -112,16 +110,13 @@ public class ChartsDAO {
         }
         return false;
     }
-
-    public boolean delete(Results results) {
+    public boolean delete(String date) {
         Connection conexao = mysql.getConnection();
 
         try {
             PreparedStatement stm = conexao.prepareStatement(deleteSQL);
 
-            stm.setString(1, results.getWeek());
-            stm.setInt(2, results.getPosition());
-
+            stm.setString(1, date);
             int registros = stm.executeUpdate();
             return registros > 0 ? true : false;
 
@@ -139,44 +134,4 @@ public class ChartsDAO {
         }
         return false;
     }
-
-    /*
-    Charts dataBase;
-    public ChartsDAO() {
-        this.dataBase = new Charts();
-
-        System.out.println("ChartsDAO - Lendo dados do arquivo CSV");
-
-        try (Scanner scanner = new Scanner(new File("./resources/DSNCharts.csv"));) {
-
-            SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
-
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                String[] cols = line.split(";");
-                Date week = null;
-
-                try {
-                    week = sdf.parse(cols[0]);
-                } catch(Exception e) { /*Não é uma data}
-
-                if (week != null) {
-                    Results results = new Results();
-                    results.setDate(cols[0]);
-                    results.setValue(Double.parseDouble(cols[1]));
-                    this.dataBase.getResults().add(results);
-
-                    // Lendo cabecalho
-                }  else if(cols.length > 0 && (cols[0].equals("Week") || cols[0].equals("Semana"))) {
-                    this.dataBase.setTerm(cols[1]);
-                }
-            }
-
-            System.out.println("Charts - Leitura realizada");
-        } catch (Exception ex) {
-            this.dataBase = new Charts();
-            ex.printStackTrace();
-            System.out.println("Charts - Erro na leitura do CSV");
-        }
-    }*/
 }

@@ -5,6 +5,11 @@ import java.sql.Date;
 public class Results {
     private String Week;
     private int Position;
+    private int size;
+
+    public int size(){
+        return size;
+    }
 
     public String getWeek() {
         return Week;
