@@ -1,6 +1,6 @@
 // set the dimensions and margins of the graph
 var margin = { top: 10, right: 30, bottom: 30, left: 60 },
-    width = 860 - margin.left - margin.right,
+    width = 1100 - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
@@ -36,7 +36,8 @@ d3.json("/api/charts",
             .attr("stroke", "#ffffff")
             .attr("stroke-width", 0.5)
             .style("fill", "#ffffff")
-            .call(d3.axisBottom(x))
+            .call(d3.axisBottom(x)
+                .tickFormat(d3.timeFormat("%Y-%m-%d")))
                 //.tickFormat(d3.timeFormat("%d-%m")) 
                 //.ticks(data.length)
 
@@ -61,6 +62,7 @@ d3.json("/api/charts",
                 .x(function (d) { return x(d.week) })
                 .y(function (d) { return y(d.position) })
             )
+
 
         // Add the points
         svg

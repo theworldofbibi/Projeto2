@@ -1,7 +1,5 @@
 package org.DuaLipa.api;
 
-import java.sql.Date;
-
 public class Results {
     private String Week;
     private int Position;

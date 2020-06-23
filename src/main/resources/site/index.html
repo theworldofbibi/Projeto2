@@ -9,100 +9,139 @@
     <!-- SCRIPTS -->
     <script src="https://d3js.org/d3.v4.js"></script>
     <script src="./local.js"></script>
+    
 </head>
 
 <body id="body">
+    
 <center>
     <a href="https://open.spotify.com/track/6WrI0LAC5M1Rw2MnX2ZvEg?si=rQ7JGqJLQWenqLkjQyrnHA">
         <img src="./logo.png" id="logo">
     </a>
-    <h2 id="graphic-name">Weekly Spotify Charts</h2>
+    <h2 id="graphic-name">Weekly Spotify Charts (BR)</h2>
     <div id="term"></div>
     <div id="my_dataviz"></div>
 </center>
 
-
+<!-- DELETE -->
 <div id = "rightbox">
     <center>
         <h2 style="font-weight:1000">Delete</h2>
         <table>
             <tr>
+                <td><b>Semana:</b></td>
+                <td><input type="text/javascript" id="txtSemana_del" placeholder="YYYY-MM-DD"></td>
             </tr>
-
-            <td id="idProfessor"></td>
-            <tr>
-                <td><b>Nome:</b></td>
-                <td id="nomeProfessor"></td>
-            </tr>
-            <tr>
-                <td  style="padding-top: 8px"><b>Matrícula:</b></td>
-                <td id="matriculaProfessor"  style="padding-top: 8px"></td>
-            </tr>
-            <tr><td></td><td><center><input type="button" onclick="apagarProfessor()" value="Apagar" id="apagar"></center></td></tr>
-        </table>
-        <p style="font-weight:bold" id="mensagem"></p>
-        <table>
-            <tr>
-                <th>ID</th>
-                <th>Nome</th>
-                <th>Matrícula</th>
-            </tr>
-            <tbody id="professores">
-            </tbody>
+            <tr><td></td><td style="padding-top: 2px"><center><input type="button" onclick="apagarChart()" value="Apagar" id="apagar"></center></td></tr>
         </table>
     </center>
 </div>
+<script>
+    const textoSemana_del = document.querySelector("#txtSemana_del");
 
+    async function apagarChart() {
+            const URL = `/api/charts/${textoSemana_del.value}`;
+            const deleteRequest = {
+            method:'DELETE'
+        };
+        try {
+            fetch(URL, deleteRequest).then(resposta => confirm("Atualizado")?location.reload():location.reload());
+            } catch (e) {
+            corpoTabela.innerHTML = e;
+            }
+        }
+    
+</script>
+
+<!-- CREATE -->
 <div id = "leftbox">
     <center>
         <h3 style="font-weight:1000">Create</h3>
         <table>
             <tr>
-                <td><b>Nome:</b></td>
-                <td><input type="text" id="txtNome"></td>
+                <td><b>Semana:</b></td>
+                <td><input type="text/javascript" id="txtSemana" placeholder="YYYY-MM-DD"></td>
             </tr>
             <tr >
-                <td style="padding-top: 8px"><b>Matrícula:</b></td>
-                <td style="padding-top: 8px"><input type="text" id="txtMatricula"></td>
+                <td style="padding-top: 8px"><b>Posição:</b></td>
+                <td style="padding-top: 8px"><input type="number" id="txtPosicao" value="1"></td>
             </tr>
-            <tr><td></td><td style="padding-top: 2px"><center><input type="button" onclick="criarProfessor()" value="Criar" id="criar"></center></td></tr>
+            <tr><td></td><td style="padding-top: 2px"><center><input type="button" onclick="criarChart()" value="Criar" id="criar"></center></td></tr>
         </table>
     </center>
-</div>
+</div>   
+<script>
+    const textoSemana = document.querySelector("#txtSemana");
+    const textoPosicao = document.querySelector("#txtPosicao");
 
+    function mostrarMensagem(teste) {
+        confirm("Atualizado")?location.reload():location.reload();
+    }
+
+    async function criarChart() {
+    const URL = "/api/charts";
+    const dadosCharts = {
+        "week": textoSemana.value,
+        "position": textoPosicao.value
+    };
+
+    const postRequest = {
+    method:'POST',
+    body: JSON.stringify(dadosCharts),
+    headers: { 'Content-type': 'application/json;charset=UTF-8' }
+    };
+        try {
+            fetch(URL, postRequest).then(resposta => resposta.json()).then(jsonResponse => mostrarMensagem(jsonResponse));
+        } catch (e) {
+        corpoTabela.innerHTML = e;
+        }
+        }
+</script>
+
+<!-- UPDATE -->
 <div id = "middlebox">
     <center>
         <h3 style="font-weight:1000">Update</h3>
         <table>
             <tr>
+                <td><b>Semana:</b></td>
+                <td><input type="text/javascript" id="txtSemana_upd" placeholder="YYYY-MM-DD"></td>
             </tr>
-
-            <td id="idProfessor"></td>
-            <tr>
-                <td><b>Nome:</b></td>
-                <td><input type="text" id="txtNome"></td>
+            <tr >
+                <td style="padding-top: 8px"><b>Posição:</b></td>
+                <td style="padding-top: 8px"><input type="number" id="txtPosicao_upd" value="1"></td>
             </tr>
-            <tr>
-                <td style="padding-top: 8px"><b>Matrícula:</b></td>
-                <td style="padding-top: 8px"><input type="text" id="txtMatricula"></td>
-            </tr>
-            <tr><td></td><td style="padding-top: 2px"><center><input type="button" onclick="atualizarProfessor()" value="Salvar" id="atualizar"></center></td></tr>
-        </table>
-        <p style="font-weight:bold" id="mensagem"></p>
-        <table>
-            <tr>
-                <th>ID</th>
-                <th>Nome</th>
-                <th>Matrícula</th>
-            </tr>
-            <tbody id="professores">
-            </tbody>
+            <tr><td></td><td style="padding-top: 2px"><center><input type="button" onclick="atualizarChart()" value="Salvar" id="atualizar"></center></td></tr>
         </table>
     </center>
 </div>
+<script>
+    const textoPosicao_upd = document.querySelector("#txtPosicao_upd");
+    const textoSemana_upd = document.querySelector("#txtSemana_upd");
+
+    async function atualizarChart() {
+            const URL = '/api/charts/';
+            const dadosCharts = {
+            'position': textoPosicao_upd.value,
+            'week': textoSemana_upd.value
+            };
+        const putRequest = {
+            method:'PUT',
+            body: JSON.stringify(dadosCharts),
+            headers: { 'Content-type': 'application/json;charset=UTF-8' }
+            };
+            try {
+            fetch(URL, putRequest).then(resposta => resposta.json()).then(jsonResponse => (confirm("Atualizado")?location.reload():location.reload()));
+            } catch (e) {
+            corpoTabela.innerHTML = e;
+            }
+        }
+        
+</script>
 
 <!-- SCRIPTS -->
 <script src="local.js"></script>
+
 </body>
 </html>
 

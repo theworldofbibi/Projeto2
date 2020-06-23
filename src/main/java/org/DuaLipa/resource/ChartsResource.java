@@ -1,11 +1,11 @@
 package org.DuaLipa.resource;
+
 import org.DuaLipa.api.*;
 import org.DuaLipa.db.*;
-
-import java.util.ArrayList;
 import java.util.List;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 @Path("charts")
 @Produces(MediaType.APPLICATION_JSON)
@@ -21,32 +21,26 @@ public class ChartsResource {
         return this.dao.read();
     }
 
-   /* @POST
-    public Results createResults(Results results){
-        this.results.add(r);
+    @POST
+    public Results createResults(Results r){
+        this.dao.create(r);
         return r;
-    }
+    } //TRATAMENTO DO ERRO
 
     @PUT
     public Results updateResults(Results r){
-        for (int i=0;i<this.results.size();i++){
-            if(this.results.get(i).getWeek().equals(r.getWeek())){
-                this.results.get(i).setPosition(r.getPosition());
-                return r;
-            }
+        if(dao.update(r)){
+            return r;
         }
         throw new NotFoundException();
     }
 
     @DELETE
-    public Results deleteResults(String date){
-        for (int i=0;i<this.results.size();i++){
-            if(this.results.get(i).getWeek().equals(date)){
-                Results aux = this.results.get(i);
-                this.results.remove(i);
-                return aux;
-            }
+    @Path("/{date}")
+    public Response deleteResults(@PathParam("date") String date) {
+        if (dao.delete(date)) {
+            return Response.ok().build();
         }
         throw new NotFoundException();
-    } */
+    }
 }
