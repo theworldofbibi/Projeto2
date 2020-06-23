@@ -1,0 +1,77 @@
+body{
+    background-image: url(background.png);
+    background-repeat: no-repeat;
+    background-color: black;
+    color: white;
+    font-family: Arial;
+}
+
+#logo{
+    width:30%;
+}
+
+#graphic-name{
+    background-color: #250C1B;
+    padding: 10px;
+    font-weight:1000;
+}
+
+#criar{
+    box-shadow: 5px 5px 5px #81013b;
+    border-radius: 3px;
+    background-color: #81013b;
+    border-color: white;
+    height:30px;
+    color: white;
+    font-weight: 1000;
+    text-align: center;
+    margin-top: 5px;
+}
+
+#atualizar{
+    box-shadow: 5px 5px 5px #3c132b;
+    border-radius: 3px;
+    background-color: #3c132b;
+    border-color: white;
+    height:30px;
+    color: white;
+    font-weight: 1000;
+    text-align: center;
+    margin-top: 5px;
+}
+
+#apagar{
+    box-shadow: 5px 5px 5px #0e3c75;
+    border-radius: 3px;
+    background-color: #0e3c75;
+    border-color: white;
+    height:30px;
+    color: white;
+    font-weight: 1000;
+    text-align: center;
+    margin-top: 5px;
+}
+
+#leftbox { 
+    float:left;  
+    background:#bc0457; 
+    width:32%; 
+    height:280px;
+    margin-top: 10px;
+} 
+
+#middlebox { 
+    float:left;  
+    background:#66214a; 
+    width:36%; 
+    height:280px; 
+    margin-top: 10px;
+} 
+
+#rightbox{ 
+    float:right; 
+    background:#1458ac; 
+    width:32%; 
+    height:280px; 
+    margin-top: 10px;
+} 
